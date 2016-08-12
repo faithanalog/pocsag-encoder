@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <strings.h>
 #include <time.h>
 
 //Check out main() at the bottom of the file
@@ -397,10 +398,10 @@ int main() {
     //Read in lines from STDIN.
     //Lines are in the format of address:message
     //The program will encode transmissions for each message, writing them
-    //to STDOUT. It will also encode a random amount of silence between them,
+    //to STDOUT. It will also encode a rand amount of silence between them,
     //from 1-10 seconds in length, to act as a simulated "delay".
     char line[65536];
-    srandom(time(NULL));
+    srand(time(NULL));
     for (;;) {
 
         if (fgets(line, sizeof(line), stdin) == NULL) {
@@ -445,11 +446,11 @@ int main() {
         free(transmission);
         free(pcm);
 
-        //Generate random amount of silence. Silence is a sample with
+        //Generate rand amount of silence. Silence is a sample with
         //a value of 0.
         
         //1-10 seconds
-        size_t silenceLength = random() % (SAMPLE_RATE * (MAX_DELAY - MIN_DELAY)) + MIN_DELAY;
+        size_t silenceLength = rand() % (SAMPLE_RATE * (MAX_DELAY - MIN_DELAY)) + MIN_DELAY;
 
         //Since the values are zero, endianness doesn't matter here
         uint16_t* silence =
