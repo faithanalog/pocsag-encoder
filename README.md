@@ -1,5 +1,6 @@
 # pocsag-encoder
-Encode pocsag messages to dump to a file.
+Encode pocsag messages to dump to a file. This project is designed to make it
+easier to understand how pocsag works, with a heavily-commented implementation.
 
 Takes input as a series of lines, one line per message.
 
