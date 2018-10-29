@@ -17,11 +17,11 @@ MAX\_DELAY defines.
 pocenc reads from stdin and writes signed 16 bit little-endian samples to stdout.
 
 
-#Example Usage
+# Example Usage
 
     echo -e "1:hello\n2:world" | pocenc
 
-#Compilation
+# Compilation
 
 pocenc doesn't rely on any dependencies but the C standard libraries. Use `make`
 to compile, or run your own C compiler manually.
