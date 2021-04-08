@@ -1,6 +1,6 @@
 # pocsag-encoder
 Encode pocsag messages to dump to a file. This project is designed to make it
-easier to understand how pocsag works, with a heavily-commented implementation.
+easier to understand how `pocsag` works, with a heavily-commented implementation.
 
 Takes input as a series of lines, one line per message.
 
@@ -11,7 +11,7 @@ Message format is as follows:
 where address is an integer, and message is contents to be encoded.
 
 Adds a random delay to the output feed of 1 to 10 seconds by default. This
-is configurable in pocsag.c near the bottom of the file by the `MIN\_DELAY` and
+is configurable in `pocsag.c` near the bottom of the file by the `MIN\_DELAY` and
 `MAX\_DELAY` defines.
 
 pocsag reads from stdin and writes signed 16 bit little-endian samples to stdout.
