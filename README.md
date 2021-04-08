@@ -11,17 +11,17 @@ Message format is as follows:
 where address is an integer, and message is contents to be encoded.
 
 Adds a random delay to the output feed of 1 to 10 seconds by default. This
-is configurable in pocenc.c near the bottom of the file by the MIN\_DELAY and
+is configurable in pocsag.c near the bottom of the file by the MIN\_DELAY and
 MAX\_DELAY defines.
 
-pocenc reads from stdin and writes signed 16 bit little-endian samples to stdout.
+pocsag reads from stdin and writes signed 16 bit little-endian samples to stdout.
 
 
 # Example Usage
 
-    echo -e "1:hello\n2:world" | pocenc
+    echo -e "1:hello\n2:world" | ./pocsag
 
 # Compilation
 
-pocenc doesn't rely on any dependencies but the C standard libraries. Use `make`
+pocsag doesn't rely on any dependencies but the C standard libraries. Use `make`
 to compile, or run your own C compiler manually.
