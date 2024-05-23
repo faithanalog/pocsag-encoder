@@ -1,7 +1,13 @@
-all: pocsag
+CC?=cc
+CFLAGS?=-O2
+PREFIX?=/usr/local
 
-pocsag: pocsag.c
-	gcc -O2 --std c99 -o pocsag pocsag.c
+pocsag : pocsag.c
+	$(CC) -o pocsag $(CFLAGS) --std c99 -Wall -o pocsag pocsag.c
 
-clean:
+.PHONY: clean install
+clean :
 	rm pocsag
+
+install : pocsag
+	install --mode 755 -D -t $(DESTDIR)$(PREFIX)/bin pocsag
