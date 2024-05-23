@@ -203,7 +203,7 @@ uint32_t encodeASCII(uint32_t initial_offset, char* str, uint32_t* out) {
  * which must precede the address word so that it is in the right spot. These
  * words will be filled with the idle value.
  */
-int addressOffset(int address) {
+uint32_t addressOffset(uint32_t address) {
     return (address & 0x7) * FRAME_SIZE;
 }
 
@@ -409,10 +409,35 @@ int main() {
             return 0;
         }
 
+        // fgets() returns the line *with* the trailing \n, which I don't want.
+        // To remove that, set the null terminator to be one earlier than it is
+        // if the string ends with a newline.
+        size_t line_length = strlen(line);
+        if (line_length == 0) {
+            return 0;
+        }
+
+        if (line[line_length - 1] == '\n') {
+            line_length--;
+            line[line_length] = 0;
+            if (line_length == 0) {
+                continue;
+            }
+        }
+
+        // Be nice and ignore a trailing \r too, though, how did that get here?
+        if (line[line_length - 1] == '\r') {
+            line_length--;
+            line[line_length] = 0;
+            if (line_length == 0) {
+                continue;
+            }
+        }
+
         size_t colonIndex = 0;
         for (size_t i = 0; i < sizeof(line); i++) {
             if (line[i] == 0) {
-                fputs("Malformed Line!", stderr);
+                fprintf(stderr, "Malformed Line!\n");
                 return 1;
             }
             if (line[i] == ':') {
@@ -421,7 +446,14 @@ int main() {
             }
         }
 
-        int address = (int) strtol(line, NULL, 10);
+        uint32_t address = (uint32_t) strtol(line, NULL, 10);
+
+        // Largest 21-bit address
+        if (address > 2097151) {
+            fprintf(stderr, "Address exceeds 21 bits: %u\n", address);
+            return 1;
+        }
+
         char* message = line + colonIndex + 1;
 
         size_t messageLength = textMessageLength(address, strlen(message));
