@@ -24,7 +24,7 @@ MAX\_DELAY defines.
 
 ```bash
 # encode two messages, and verify multimon can decode them
-printf '1:hello\n9:world" | pocsag | multimon-ng -c -a POCSAG512 -q -
+printf '1:hello\n9:world' | pocsag | multimon-ng -c -a POCSAG512 -q -
 
 # encode a message to a file (raw, 22050Hz PCM S16LE)
 printf '11:good evening' > transmission.raw
